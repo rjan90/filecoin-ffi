@@ -199,7 +199,6 @@ commands:
         description: is a darwin build environment?
         type: boolean
     steps:
-      - checkout
       - when:
           condition: << parameters.linux >>
           steps:
@@ -222,6 +221,7 @@ commands:
             - run:
                 name: Install other dependencies with Homebrew
                 command: HOMEBREW_NO_AUTO_UPDATE=1 brew install pkg-config md5sha1sum jq hwloc || brew link --overwrite python@2
+      - checkout
       - run:
           name: Install Rust toolchain
           command: |
