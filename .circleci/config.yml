@@ -2,7 +2,6 @@ version: 2.1
 
 orbs:
   shellcheck: circleci/shellcheck@3.0.0
-  rust: circleci/rust@1.6.0
 
 executors:
   golang:
@@ -150,7 +149,6 @@ jobs:
     steps:
       - configure_environment_variables
       - prepare
-      - rust/install
       - run:
           name: Run cargo clippy
           command: cd rust && cargo clippy --all-targets --features blst-portable,opencl -- -D warnings
