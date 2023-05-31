@@ -149,8 +149,8 @@ jobs:
     executor: cuda
     steps:
       - configure_environment_variables
-      - rust/install
       - prepare
+      - rust/install
       - run:
           name: Run cargo clippy
           command: cd rust && cargo clippy --all-targets --features blst-portable,opencl -- -D warnings
