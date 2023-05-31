@@ -140,7 +140,7 @@ jobs:
       - prepare
       - run:
           name: Run cargo clippy
-          command: cd rust && cargo clippy --all-targets --no-default-features --features multicore-sdr,blst-portable,opencl -- -D warnings
+          command: cd rust && cargo clippy --all-targets --features blst-portable,opencl -- -D warnings
 
 workflows:
   version: 2
@@ -225,7 +225,7 @@ commands:
             RELEASE_NAME="${CIRCLE_PROJECT_REPONAME}-$(uname)-$(uname -m)-standard"
 
             # Note: the blst dependency uses the portable configuration for maximum compatibility
-            ./scripts/build-release.sh build --verbose --no-default-features --features multicore-sdr,opencl,blst-portable
+            ./scripts/build-release.sh build --verbose --features opencl,blst-portable
             ./scripts/package-release.sh $TARBALL_PATH
             ./scripts/publish-release.sh $TARBALL_PATH $RELEASE_NAME
       - run:
@@ -236,7 +236,7 @@ commands:
             TARBALL_PATH="/tmp/${CIRCLE_PROJECT_REPONAME}-$(uname)-$(uname -m)-optimized.tar.gz"
             RUSTFLAGS="-C target-feature=$(cat rustc-target-features-optimized.json | jq -r '.[].rustc_target_feature' | tr '\n' ',')"
 
-            ./scripts/build-release.sh build --verbose --no-default-features --features multicore-sdr,opencl
+            ./scripts/build-release.sh build --verbose --features opencl
             ./scripts/package-release.sh $TARBALL_PATH
 
   publish_darwin_release:
@@ -273,7 +273,6 @@ commands:
             echo 'export PATH="/usr/local/go/bin:${HOME}/.cargo/bin:${PATH}:${HOME}/go/bin:${HOME}/.bin"' >> $BASH_ENV
             echo 'export RUST_LOG=info' >> $BASH_ENV
             echo 'export CIRCLE_ARTIFACTS="/tmp"' >> $BASH_ENV
-            echo 'export FFI_USE_OPENCL=1' >> $BASH_ENV
       - when:
           condition: << parameters.darwin >>
           steps:
@@ -314,7 +313,7 @@ commands:
                 no_output_timeout: 90m
       - run:
           name: Run the Rust tests
-          command: cd rust && FIL_PROOFS_PARAMETER_CACHE="${HOME}/filecoin-proof-parameters/" RUST_LOG=info cargo test --no-default-features --features multicore-sdr,opencl --all --release -- --test-threads 1&& cd ..
+          command: cd rust && FIL_PROOFS_PARAMETER_CACHE="${HOME}/filecoin-proof-parameters/" RUST_LOG=info cargo test --all --release -- --test-threads 1 && cd ..
           no_output_timeout: 90m
       - run:
           name: Run the Go tests
