@@ -43,7 +43,7 @@ jobs:
           command: "! go fmt ./... 2>&1 | read"
   go_lint:
     description: Run various linters
-    executor: golang
+    executor: cuda
     resource_class: large
     steps:
       - configure_environment_variables
@@ -75,7 +75,7 @@ jobs:
       run_leak_detector:
         type: boolean
         default: true
-    executor: golang
+    executor: cuda
     resource_class: large
     working_directory: ~/go/src/github.com/filecoin-project/filecoin-ffi
     steps:
@@ -107,7 +107,7 @@ jobs:
       - build_project
       - compile_tests
   publish_linux_x86_64_staticlib:
-    executor: golang
+    executor: cuda
     resource_class: large
     steps:
       - configure_environment_variables
@@ -158,34 +158,34 @@ workflows:
   test_all:
     jobs:
       # Lint the install Bash script
-      #- shellcheck
-      #- rustfmt
+      - shellcheck
+      - rustfmt
       - clippy
-      #- gofmt
-      #- go_lint
-      #- build_and_test_linux_cgo_bindings:
-      #    run_leak_detector: false
-      #- build_and_test_aarch64_linux_cgo_bindings:
-      #    run_leak_detector: false
-      #- build_darwin_cgo_bindings
-      #- publish_linux_x86_64_staticlib:
-      #    filters:
-      #      tags:
-      #        only: /^v.*/
-      #      branches:
-      #        ignore: /.*/
-      #- publish_linux_aarch64_staticlib:
-      #    filters:
-      #      tags:
-      #        only: /^v.*/
-      #      branches:
-      #        ignore: /.*/
-      #- publish_darwin_staticlib:
-      #    filters:
-      #      tags:
-      #        only: /^v.*/
-      #      branches:
-      #        ignore: /.*/
+      - gofmt
+      - go_lint
+      - build_and_test_linux_cgo_bindings:
+          run_leak_detector: false
+      - build_and_test_aarch64_linux_cgo_bindings:
+          run_leak_detector: false
+      - build_darwin_cgo_bindings
+      - publish_linux_x86_64_staticlib:
+          filters:
+            tags:
+              only: /^v.*/
+            branches:
+              ignore: /.*/
+      - publish_linux_aarch64_staticlib:
+          filters:
+            tags:
+              only: /^v.*/
+            branches:
+              ignore: /.*/
+      - publish_darwin_staticlib:
+          filters:
+            tags:
+              only: /^v.*/
+            branches:
+              ignore: /.*/
 
 commands:
   prepare:
