@@ -222,8 +222,9 @@ commands:
       - run:
           name: Install Rust toolchain
           command: |
-            curl https://sh.rustup.rs -sSf | sh -s -- -y
-            rustc --version
+            #curl https://sh.rustup.rs -sSf | sh -s -- -y
+            curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- --default-toolchain none
+            #rustc --version
       - run: git submodule sync
       - run: git submodule update --init
 
