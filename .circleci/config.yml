@@ -14,7 +14,8 @@ executors:
     resource_class: small
   cuda:
     docker:
-      - image: nvidia/cuda:12.0.1-devel-ubuntu22.04
+      #- image: nvidia/cuda:12.0.1-devel-ubuntu22.04
+      - image: linux-cuda-11
     resource_class: small
     environment:
       RUST_LOG: trace
