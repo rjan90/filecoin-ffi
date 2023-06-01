@@ -210,6 +210,7 @@ commands:
                   sudo apt-get update
                   #sudo apt-get install --no-install-recommends -y jq valgrind ocl-icd-opencl-dev libssl-dev libhwloc-dev curl git golang pkg-config nvidia-cuda-toolkit
                   sudo apt-get install --no-install-recommends -y jq valgrind ocl-icd-opencl-dev libssl-dev libhwloc-dev nvidia-cuda-toolkit
+                  apt-cache policy nvidia-cuda-toolkit
       - when:
           condition: << parameters.darwin >>
           steps:
