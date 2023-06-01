@@ -8,10 +8,24 @@ executors:
     docker:
       - image: cimg/go:1.17.9
     resource_class: small
+    environment:
+      RUST_LOG: trace
+      # Build the kernel only for the single architecture . This should reduce
+      # the overall compile-time significantly.
+      EC_GPU_CUDA_NVCC_ARGS: --fatbin --gpu-architecture=sm_75 --generate-code=arch=compute_75,code=sm_75
+      BELLMAN_CUDA_NVCC_ARGS: --fatbin --gpu-architecture=sm_75 --generate-code=arch=compute_75,code=sm_75
+      NEPTUNE_CUDA_NVCC_ARGS: --fatbin --gpu-architecture=sm_75 --generate-code=arch=compute_75,code=sm_75
   rust:
     docker:
       - image: cimg/rust:1.67
     resource_class: small
+    environment:
+      RUST_LOG: trace
+      # Build the kernel only for the single architecture . This should reduce
+      # the overall compile-time significantly.
+      EC_GPU_CUDA_NVCC_ARGS: --fatbin --gpu-architecture=sm_75 --generate-code=arch=compute_75,code=sm_75
+      BELLMAN_CUDA_NVCC_ARGS: --fatbin --gpu-architecture=sm_75 --generate-code=arch=compute_75,code=sm_75
+      NEPTUNE_CUDA_NVCC_ARGS: --fatbin --gpu-architecture=sm_75 --generate-code=arch=compute_75,code=sm_75
   cuda:
     docker:
       - image: nvidia/cuda:12.0.1-devel-ubuntu22.04
