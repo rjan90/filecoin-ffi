@@ -303,7 +303,7 @@ commands:
           DIR=$(pwd)
           cd $(mktemp -d)
           go install github.com/filecoin-project/go-paramfetch/paramfetch@latest
-          $OPATH/bin/paramfetch 2048 "${DIR}/parameters.json" "${DIR}/srs-inner-product.json"
+          $GOPATH/bin/paramfetch 2048 "${DIR}/parameters.json" "${DIR}/srs-inner-product.json"
 
   build_project:
     steps:
