@@ -6,7 +6,7 @@ orbs:
 executors:
   golang:
     docker:
-      - image: cimg/go:1.20
+      - image: cimg/go:1.17.9
     resource_class: small
   rust:
     docker:
