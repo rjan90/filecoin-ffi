@@ -66,6 +66,9 @@ jobs:
     steps:
       - configure_environment_variables
       - prepare
+      - run:
+          name: Make sure libcuda is found by linker
+          command: sudo ln --symbolic --relative /usr/lib/aarch64-linux-gnu/stubs/libcuda.so /usr/lib/aarch64-linux-gnu/stubs/libcuda.so.1
       - build_project
       - restore_parameter_cache
       - obtain_filecoin_parameters
@@ -293,6 +296,8 @@ commands:
             echo 'export RUST_LOG=info' >> $BASH_ENV
             echo 'export CIRCLE_ARTIFACTS="/tmp"' >> $BASH_ENV
             echo 'export LD_LIBRARY_PATH="/usr/local/cuda/compat:${LD_LIBRARY_PATH}"' >> ${BASH_ENV}
+            # Make sure CUDA is found on aarch64
+            echo 'export LIBRARY_PATH="/usr/lib/aarch64-linux-gnu/stubs:${LIBRARY_PATH}"' >> ${BASH_ENV}
       - when:
           condition: << parameters.darwin >>
           steps:
