@@ -60,7 +60,7 @@ jobs:
         type: boolean
         default: true
     machine:
-      image: ubuntu-2004:current
+      image: ubuntu-2204:current
     resource_class: arm.large
     working_directory: ~/go/src/github.com/filecoin-project/filecoin-ffi
     steps:
