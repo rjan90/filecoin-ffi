@@ -54,7 +54,7 @@ main() {
     # generate filcrypto.h
     # Default is CUDA, also include OpenCL for maximum compatibility.
     RUSTFLAGS="${__rust_flags}" HEADER_DIR="." \
-        cargo test --release --features opencl --locked build_headers --features c-headers
+        cargo test --features opencl --locked build_headers --features c-headers
 
     # generate pkg-config
     #
