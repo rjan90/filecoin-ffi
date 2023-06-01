@@ -19,13 +19,6 @@ executors:
     docker:
       - image: cimg/rust:1.67
     resource_class: small
-    environment:
-      RUST_LOG: trace
-      # Build the kernel only for the single architecture . This should reduce
-      # the overall compile-time significantly.
-      EC_GPU_CUDA_NVCC_ARGS: --fatbin --gpu-architecture=sm_75 --generate-code=arch=compute_75,code=sm_75
-      BELLMAN_CUDA_NVCC_ARGS: --fatbin --gpu-architecture=sm_75 --generate-code=arch=compute_75,code=sm_75
-      NEPTUNE_CUDA_NVCC_ARGS: --fatbin --gpu-architecture=sm_75 --generate-code=arch=compute_75,code=sm_75
 
 jobs:
   shellcheck:
@@ -311,7 +304,7 @@ commands:
           DIR=$(pwd)
           cd $(mktemp -d)
           go install github.com/filecoin-project/go-paramfetch/paramfetch@latest
-          $GOPATH/bin/paramfetch 2048 "${DIR}/parameters.json" "${DIR}/srs-inner-product.json"
+          $OPATH/bin/paramfetch 2048 "${DIR}/parameters.json" "${DIR}/srs-inner-product.json"
 
   build_project:
     steps:
