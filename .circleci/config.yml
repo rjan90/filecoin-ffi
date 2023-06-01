@@ -43,7 +43,7 @@ jobs:
           command: "! go fmt ./... 2>&1 | read"
   go_lint:
     description: Run various linters
-    executor: go
+    executor: golang
     resource_class: large
     steps:
       - configure_environment_variables
