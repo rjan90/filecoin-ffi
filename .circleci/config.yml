@@ -26,17 +26,6 @@ executors:
       EC_GPU_CUDA_NVCC_ARGS: --fatbin --gpu-architecture=sm_75 --generate-code=arch=compute_75,code=sm_75
       BELLMAN_CUDA_NVCC_ARGS: --fatbin --gpu-architecture=sm_75 --generate-code=arch=compute_75,code=sm_75
       NEPTUNE_CUDA_NVCC_ARGS: --fatbin --gpu-architecture=sm_75 --generate-code=arch=compute_75,code=sm_75
-  cuda:
-    docker:
-      - image: nvidia/cuda:12.0.1-devel-ubuntu22.04
-    resource_class: small
-    environment:
-      RUST_LOG: trace
-      # Build the kernel only for the single architecture . This should reduce
-      # the overall compile-time significantly.
-      EC_GPU_CUDA_NVCC_ARGS: --fatbin --gpu-architecture=sm_75 --generate-code=arch=compute_75,code=sm_75
-      BELLMAN_CUDA_NVCC_ARGS: --fatbin --gpu-architecture=sm_75 --generate-code=arch=compute_75,code=sm_75
-      NEPTUNE_CUDA_NVCC_ARGS: --fatbin --gpu-architecture=sm_75 --generate-code=arch=compute_75,code=sm_75
 
 jobs:
   shellcheck:
@@ -89,7 +78,7 @@ jobs:
       run_leak_detector:
         type: boolean
         default: true
-    executor: cuda
+    executor: golang
     resource_class: large
     working_directory: ~/go/src/github.com/filecoin-project/filecoin-ffi
     steps:
@@ -121,7 +110,7 @@ jobs:
       - build_project
       - compile_tests
   publish_linux_x86_64_staticlib:
-    executor: cuda
+    executor: golang
     resource_class: large
     steps:
       - configure_environment_variables
@@ -159,7 +148,7 @@ jobs:
           name: Run cargo fmt
           command: cargo fmt --manifest-path ./rust/Cargo.toml --all -- --check
   clippy:
-    executor: cuda
+    executor: golang
     steps:
       - configure_environment_variables
       - prepare
