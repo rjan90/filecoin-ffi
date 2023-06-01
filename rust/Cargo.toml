@@ -63,3 +63,6 @@ cuda = ["filecoin-proofs-api/cuda", "rust-gpu-tools/cuda", "fvm3/cuda", "fvm2/cu
 opencl = ["filecoin-proofs-api/opencl", "rust-gpu-tools/opencl", "fvm3/opencl", "fvm2/opencl"]
 multicore-sdr = ["filecoin-proofs-api/multicore-sdr"]
 c-headers = ["safer-ffi/headers"]
+
+[patch.crates-io]
+fil-rustacuda = { git = "https://github.com/filecoin-project/fil-rustacuda", branch = "uuid-more-portable" }
