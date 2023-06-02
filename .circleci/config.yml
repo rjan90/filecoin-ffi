@@ -37,7 +37,7 @@ jobs:
       #    command: "! go fmt ./... 2>&1 | read"
       - run:
           command: |
-            "! go fmt ./... 2>&1 | read"
+            ! go fmt ./... 2>&1 | read
             echo $?
   go_lint:
     description: Run various linters
