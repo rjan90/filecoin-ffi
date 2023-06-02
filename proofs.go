@@ -1,7 +1,7 @@
 //go:build cgo
 // +build cgo
 
-package ffi
+   package ffi
 
 // #cgo linux LDFLAGS: ${SRCDIR}/libfilcrypto.a -Wl,-unresolved-symbols=ignore-all
 // #cgo darwin LDFLAGS: ${SRCDIR}/libfilcrypto.a -Wl,-undefined,dynamic_lookup
