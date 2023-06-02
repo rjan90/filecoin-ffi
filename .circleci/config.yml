@@ -138,7 +138,6 @@ jobs:
     executor: rust
     steps:
       - configure_environment_variables
-      - prepare
       - run:
           name: Run cargo fmt
           command: cargo fmt --manifest-path ./rust/Cargo.toml --all -- --check
