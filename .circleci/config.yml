@@ -200,11 +200,8 @@ commands:
       - when:
           condition: << parameters.linux >>
           steps:
-            - run:
-                name: Install dependencies
-                command: |
-                  sudo apt-get update
-                  sudo apt-get install --no-install-recommends -y valgrind ocl-icd-opencl-dev libssl-dev libhwloc-dev nvidia-cuda-toolkit
+            - run: sudo apt-get update
+            - run: sudo apt-get install --no-install-recommends -y valgrind ocl-icd-opencl-dev libssl-dev libhwloc-dev nvidia-cuda-toolkit
       - when:
           condition: << parameters.darwin >>
           steps:
