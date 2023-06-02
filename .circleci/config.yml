@@ -89,7 +89,7 @@ jobs:
     macos:
       xcode: "12.5.1"
     working_directory: ~/go/src/github.com/filecoin-project/filecoin-ffi
-    resource_class: medium
+    resource_class: macos.x86.medium.gen2
     steps:
       - configure_environment_variables:
           linux: false
@@ -120,7 +120,7 @@ jobs:
   publish_darwin_staticlib:
     macos:
       xcode: "12.5.1"
-    resource_class: medium
+    resource_class: macos.x86.medium.gen2
     steps:
       - configure_environment_variables:
           linux: false
