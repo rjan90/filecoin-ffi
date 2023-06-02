@@ -28,24 +28,15 @@ jobs:
   gofmt:
     executor: golang
     steps:
-      #- configure_environment_variables
-      #- prepare
       - checkout
       - run: git submodule sync
       - run: git submodule update --init
-      - run: git status
-      - run: head -35 proofs.go
       - run:
-          command: "! go fmt ./... 2>&1 | read"
-      - run: head -35 proofs.go
-      - run:
+          # `! go fmt ./... 2>&1 | read"` doesn't work, this one does, thanks
+          # https://carsonip.me/posts/go-fmt-and-ci/
           command: |
             output=$(go fmt ./... 2>&1)
             test -z "${output}"
-      #- run: git status
-      #- run: go fmt ./...
-      #- run: head -35 proofs.go
-      #- run: git status
 
   go_lint:
     description: Run various linters
