@@ -28,9 +28,11 @@ jobs:
   gofmt:
     executor: golang
     steps:
-      - checkout
-      - run: git submodule sync
-      - run: git submodule update --init
+      - configure_environment_variables
+      - prepare
+      #- checkout
+      #- run: git submodule sync
+      #- run: git submodule update --init
       - run:
           command: "! go fmt ./... 2>&1 | read"
   go_lint:
