@@ -9,7 +9,7 @@ executors:
       - image: cimg/go:1.18
     resource_class: small
     environment:
-      # Build the kernel only for the single architecture . This should reduce
+      # Build the kernel only for the single architecture. This should reduce
       # the overall compile-time significantly.
       EC_GPU_CUDA_NVCC_ARGS: --fatbin --gpu-architecture=sm_75 --generate-code=arch=compute_75,code=sm_75
       BELLMAN_CUDA_NVCC_ARGS: --fatbin --gpu-architecture=sm_75 --generate-code=arch=compute_75,code=sm_75
