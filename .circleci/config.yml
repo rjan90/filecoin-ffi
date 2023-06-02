@@ -38,10 +38,14 @@ jobs:
       - run:
           command: "! go fmt ./... 2>&1 | read"
       - run: head -35 proofs.go
-      - run: git status
-      - run: go fmt ./...
-      - run: head -35 proofs.go
-      - run: git status
+      - run:
+          command: |
+            output=$(go fmt ./... 2>&1)
+            test -z "${output}"
+      #- run: git status
+      #- run: go fmt ./...
+      #- run: head -35 proofs.go
+      #- run: git status
 
   go_lint:
     description: Run various linters
