@@ -37,7 +37,7 @@ jobs:
   go_lint:
     description: Run various linters
     executor: golang
-    resource_class: large
+    resource_class: small
     steps:
       - configure_environment_variables
       - prepare
@@ -51,7 +51,7 @@ jobs:
         default: true
     machine:
       image: ubuntu-2204:current
-    resource_class: arm.large
+    resource_class: arm.medium
     working_directory: ~/go/src/github.com/filecoin-project/filecoin-ffi
     steps:
       - configure_environment_variables
@@ -72,7 +72,7 @@ jobs:
         type: boolean
         default: true
     executor: golang
-    resource_class: large
+    resource_class: medium
     working_directory: ~/go/src/github.com/filecoin-project/filecoin-ffi
     steps:
       - configure_environment_variables
@@ -104,7 +104,7 @@ jobs:
       - compile_tests
   publish_linux_x86_64_staticlib:
     executor: golang
-    resource_class: large
+    resource_class: medium
     steps:
       - configure_environment_variables
       - prepare
@@ -112,7 +112,7 @@ jobs:
   publish_linux_aarch64_staticlib:
     machine:
       image: ubuntu-2004:current
-    resource_class: arm.large
+    resource_class: arm.medium
     steps:
       - configure_environment_variables
       - prepare
