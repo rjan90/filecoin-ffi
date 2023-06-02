@@ -32,8 +32,6 @@ jobs:
   gofmt:
     executor: golang
     steps:
-      - configure_environment_variables
-      - prepare
       - run:
           command: "! go fmt ./... 2>&1 | read"
   go_lint:
