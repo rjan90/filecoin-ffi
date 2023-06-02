@@ -33,8 +33,12 @@ jobs:
       #- checkout
       #- run: git submodule sync
       #- run: git submodule update --init
+      #- run:
+      #    command: "! go fmt ./... 2>&1 | read"
       - run:
-          command: "! go fmt ./... 2>&1 | read"
+          command: |
+            pwd
+            "! go fmt ./... 2>&1 | read"
   go_lint:
     description: Run various linters
     executor: golang
