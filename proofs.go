@@ -28,7 +28,7 @@ import (
 // VerifySeal returns true if the sealing operation from which its inputs were
 // derived was valid, and false if not.
 func VerifySeal(info proof.SealVerifyInfo) (bool, error) {
-	sp, err := toFilRegisteredSealProof(info.SealProof)
+sp, err := toFilRegisteredSealProof(info.SealProof)
 	if err != nil {
 		return false, err
 	}
