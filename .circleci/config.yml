@@ -32,6 +32,9 @@ jobs:
   gofmt:
     executor: golang
     steps:
+      - checkout
+      - run: git submodule sync
+      - run: git submodule update --init
       - run:
           command: "! go fmt ./... 2>&1 | read"
   go_lint:
@@ -135,6 +138,9 @@ jobs:
   rustfmt:
     executor: rust
     steps:
+      - checkout
+      - run: git submodule sync
+      - run: git submodule update --init
       - run:
           name: Run cargo fmt
           command: cargo fmt --manifest-path ./rust/Cargo.toml --all -- --check
