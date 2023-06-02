@@ -203,8 +203,6 @@ commands:
             - run:
                 name: Install dependencies
                 command: |
-                  # If the user is root already, make `sudo` a no-op.
-                  [[ ${EUID} = 0 ]] && shopt -s expand_aliases && alias sudo=''
                   sudo apt-get update
                   #sudo apt-get install --no-install-recommends -y jq valgrind ocl-icd-opencl-dev libssl-dev libhwloc-dev curl git golang pkg-config nvidia-cuda-toolkit
                   sudo apt-get install --no-install-recommends -y valgrind ocl-icd-opencl-dev libssl-dev libhwloc-dev nvidia-cuda-toolkit
