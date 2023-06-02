@@ -32,6 +32,7 @@ jobs:
       - run: git submodule sync
       - run: git submodule update --init
       - run:
+          name: Run go fmt
           # `! go fmt ./... 2>&1 | read"` doesn't work, this one does, thanks
           # https://carsonip.me/posts/go-fmt-and-ci/
           command: |
